@@ -1,0 +1,30 @@
+{
+  "name": "mhsp",
+  "version": "0.1.0",
+  "description": "parser for massive heap snapshots",
+  "main": "main.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nodesource/massive-heap-snapshot-parser.git"
+  },
+  "keywords": [
+    "heap",
+    "snapshot",
+    "parse"
+  ],
+  "author": "NodeSource <npm@nodesource.com > (https://nodesource.com)",
+  "contributors": [
+    "Trevor Norris <trev.norris@gmail.com>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nodesource/massive-heap-snapshot-parser/issues"
+  },
+  "homepage": "https://github.com/nodesource/massive-heap-snapshot-parser"
+}
