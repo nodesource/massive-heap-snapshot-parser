@@ -1,0 +1,4 @@
+core
+tmp/
+node_modules/
+**/*.bin
