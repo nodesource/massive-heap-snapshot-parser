@@ -1,6 +1,6 @@
 'use strict';
 
-const parseSnapshot = require('./lib/json-parse.js');
+const { parseSnapshot, importBin } = require('./lib/json-parse.js');
 const print = process._rawDebug;
 
 // [ 'snapshot' ] 12 749 737
@@ -12,6 +12,13 @@ const print = process._rawDebug;
 // [ 'strings' ] 1981644112 2278098259 296454147
 
 const file_path = process.argv[2];
+
+
+const da = importBin(file_path);
+print(da.nodes.length);
+return;
+
+
 
 //const fs = require('fs');
 //const fd = fs.openSync(file_path, 'r');
@@ -26,7 +33,12 @@ const accessor = parseSnapshot(file_path);
 //print(accessor.snapshot);
 print('nodes', accessor.nodes.length);
 print('edges', accessor.edges.length);
-print('_strings_indexes', accessor._strings_indexes.length);
-print('strings', accessor._strings.byteLength);
-print(accessor._strings.toString(
-  'latin1', accessor._strings.byteLength - 100, accessor._strings.byteLength));
+print('-----------------');
+print(accessor.getString(0));
+print(accessor.getString(10));
+print(accessor.getString(1000));
+print(accessor.getString(100000));
+print('-----------------');
+
+
+accessor.writeToFile('./app-snapshot.bin');
