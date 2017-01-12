@@ -15,7 +15,10 @@ const file_path = process.argv[2];
 
 
 const da = importBin(file_path);
-print(da.nodes.length);
+print('nodes', da.nodes.byteLength);
+print('edges', da.edges.byteLength);
+print('_strings_indexes', da._strings_indexes.byteLength);
+print('_strings', da._strings.byteLength);
 return;
 
 
@@ -28,11 +31,14 @@ return;
 //return;
 
 
+
 const accessor = parseSnapshot(file_path);
 
 //print(accessor.snapshot);
-print('nodes', accessor.nodes.length);
-print('edges', accessor.edges.length);
+print('nodes', accessor.nodes.byteLength);
+print('edges', accessor.edges.byteLength);
+print('_strings_indexes', accessor._strings_indexes.byteLength);
+print('_strings', accessor._strings.byteLength);
 print('-----------------');
 print(accessor.getString(0));
 print(accessor.getString(10));
@@ -41,4 +47,4 @@ print(accessor.getString(100000));
 print('-----------------');
 
 
-accessor.writeToFile('./app-snapshot.bin');
+print(accessor.writeToFile('./app-snapshot.bin'));
