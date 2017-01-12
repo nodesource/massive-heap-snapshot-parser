@@ -1,8 +1,6 @@
 'use strict';
 
-const fs = require('fs');
-const DepthStream = require('json-depth-stream');
-const parseBuffer = require('./lib/parse-buffer.js');
+const parseSnapshot = require('./lib/json-parse.js');
 const print = process._rawDebug;
 
 // [ 'snapshot' ] 12 749 737
@@ -14,21 +12,21 @@ const print = process._rawDebug;
 // [ 'strings' ] 1981644112 2278098259 296454147
 
 const file_path = process.argv[2];
-const fd = fs.openSync(file_path, 'r');
 
-const buf = Buffer.alloc(296454147);
-const strings_buf = fs.readSync(fd, buf, 0, buf.byteLength, 1981644112);
-const array_offsets = parseBuffer(strings_buf);
-//print('loaded ', buf.byteLength);
-//print(buf.slice(0, 100).toString());
+//const fs = require('fs');
+//const fd = fs.openSync(file_path, 'r');
+//const b = Buffer.alloc(100);
+//fs.readSync(fd, b, 0, b.byteLength, 1981644043);
+//print(b.toString());
+//return;
 
 
-function printNodes() {
-  const file_path = process.argv[2];
-  const file = fs.createReadStream(file_path);
-  const json = new DepthStream(1);
-  json.on('visit', (path, start, end) => {
-    console.log(path, start, end, end - start);
-  });
-  file.pipe(json);
-}
+const accessor = parseSnapshot(file_path);
+
+//print(accessor.snapshot);
+print('nodes', accessor.nodes.length);
+print('edges', accessor.edges.length);
+print('_strings_indexes', accessor._strings_indexes.length);
+print('strings', accessor._strings.byteLength);
+print(accessor._strings.toString(
+  'latin1', accessor._strings.byteLength - 100, accessor._strings.byteLength));
