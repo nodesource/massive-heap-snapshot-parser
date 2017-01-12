@@ -42,3 +42,16 @@ print('-----------------');
 // retrieve a couple strings to end this
 print(da.getString(0));
 print(da.getString(10));
+
+
+// now do a benchmark
+const ITER = 1e4;
+const len = da._strings_indexes.length >>> 1;
+let t = process.hrtime();
+for (let i = 0; i < ITER; i++) {
+  for (let j = 0; j < len; j++) {
+    da.getString(j);
+  }
+}
+t = process.hrtime(t);
+print(((t[0] * 1e9 + t[1]) / (ITER * len)).toFixed(1) + ' ns/op');
